@@ -14,9 +14,9 @@ data class ResolveRequest(
 @Service
 class ResolverService(private val repo: PluginRepository) {
 
-    fun resolveBet(request: ResolveRequest): SemVer.Plugin? {
+    fun resolveBest(request: ResolveRequest): Plugin? {
         val bestPlugin =
-            repo.getAllVersionsById(SemVer.PluginId(request.pluginId)).filter { request.os == it.os && !it.yanked }
+            repo.getAllVersionsById(PluginId(request.pluginId)).filter { request.os == it.os && !it.yanked }
                 .filter { request.allowPrerelease || it.version.preRelease.isNullOrEmpty() }
                 .filter { request.arch == null || it.arch == null || request.arch == it.arch }
 
@@ -25,6 +25,6 @@ class ResolverService(private val repo: PluginRepository) {
 
         // Prefer exact arch match first, then by highest version
         val (exact, others) = bestPlugin.partition { it.arch == request.arch && it.arch != null }
-        return (exact + others).maxByOrNull { it.version }
+        return (exact + others).maxByOrNull{ it.version }
     }
 }

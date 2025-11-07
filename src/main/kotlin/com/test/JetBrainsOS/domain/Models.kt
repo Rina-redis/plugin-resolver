@@ -36,6 +36,7 @@ data class SemVer(val major: Int, val minor: Int, val patch: Int, val preRelease
             )
         }
     }
+}
 
     //for not accidentally mixing the values and for definity
     @JvmInline
@@ -53,4 +54,3 @@ data class SemVer(val major: Int, val minor: Int, val patch: Int, val preRelease
         val url: String,
         val yanked: Boolean = false
     )
-}
