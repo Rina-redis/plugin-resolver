@@ -44,9 +44,9 @@ data class SemVer(val major: Int, val minor: Int, val patch: Int, val preRelease
     @JvmInline
     value class PluginVersionId(val value: String)
 
-    data class PluginVersion(
-        val id: PluginVersionId,
-        val pluginId: PluginId,
+    data class Plugin(
+        val id: PluginVersionId, //id of a current PluginVersion aka "formatter:1.2.0"
+        val pluginId: PluginId, //id of a plugin as a whole
         val version: SemVer,
         val os: OS,
         val arch: Arch? = null,
