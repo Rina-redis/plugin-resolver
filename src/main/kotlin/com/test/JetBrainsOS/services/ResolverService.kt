@@ -24,7 +24,9 @@ class ResolverService(private val repo: PluginRepository) {
             return null
 
         // Prefer exact arch match first, then by highest version
-        val (exact, others) = bestPlugin.partition { it.arch == request.arch && it.arch != null }
-        return (exact + others).maxByOrNull{ it.version }
+        val (exact, others) = bestPlugin.partition { request.arch != null && it.arch == request.arch }
+        val pool = if (exact.isNotEmpty()) exact else others
+
+        return pool.maxByOrNull { it.version }
     }
 }

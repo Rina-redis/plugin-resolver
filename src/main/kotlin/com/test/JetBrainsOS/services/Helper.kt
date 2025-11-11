@@ -16,7 +16,7 @@ fun SavePluginVersionRequest.toDomain(): Plugin = Plugin(
 fun Plugin.toResponse(): PluginVersionResponse = PluginVersionResponse(
     id = id.value,
     pluginId = pluginId.value,
-    version = version.format(),
+    version = version.formatSemVer(),
     os = os,
     arch = arch,
     url = url
@@ -36,7 +36,3 @@ private fun buildStableId(
     os: OS,
     arch: Arch?
 ): String = "$pluginId:$version:$os:${arch ?: "any"}"
-
-private fun SemVer.format(): String =
-    listOf(major, minor, patch).joinToString(".")+
-            (preRelease?.let { "-$it" } ?: "")

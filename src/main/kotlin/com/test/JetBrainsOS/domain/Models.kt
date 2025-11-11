@@ -22,6 +22,13 @@ data class SemVer(val major: Int, val minor: Int, val patch: Int, val preRelease
         }
     }
 
+    fun formatSemVer():String {
+        return if (preRelease == null)
+            "${major}.${minor}.${patch}"
+        else
+            "${major}.${minor}.${patch}-$preRelease"
+    }
+
     companion object {
         //fix the Regex (more easy version of suggest RegEx by https://semver.org/)
         private val re = Regex("""^(\d+)\.(\d+)\.(\d+)(?:-([0-9A-Za-z.-]+))?$""")
@@ -38,19 +45,19 @@ data class SemVer(val major: Int, val minor: Int, val patch: Int, val preRelease
     }
 }
 
-    //for not accidentally mixing the values and for definity
-    @JvmInline
-    value class PluginId(val value: String)
+//for not accidentally mixing the values and for definity
+@JvmInline
+value class PluginId(val value: String)
 
-    @JvmInline
-    value class PluginVersionId(val value: String)
+@JvmInline
+value class PluginVersionId(val value: String)
 
-    data class Plugin(
-        val id: PluginVersionId, //id of a current PluginVersion aka "formatter:1.2.0"
-        val pluginId: PluginId, //id of a plugin as a whole
-        val version: SemVer,
-        val os: OS,
-        val arch: Arch? = null,
-        val url: String,
-        val yanked: Boolean = false
-    )
+data class Plugin(
+    val id: PluginVersionId, //id of a current PluginVersion aka "formatter:1.2.0"
+    val pluginId: PluginId, //id of a plugin as a whole
+    val version: SemVer,
+    val os: OS,
+    val arch: Arch? = null,
+    val url: String,
+    val yanked: Boolean = false
+)
