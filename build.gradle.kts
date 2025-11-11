@@ -25,6 +25,8 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("gg.jte:jte-spring-boot-starter-3:3.1.16")
+	implementation("info.picocli:picocli:4.7.6")
+	implementation("info.picocli:picocli-spring-boot-starter:4.7.6")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.boot:spring-boot-testcontainers")
